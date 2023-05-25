@@ -35,7 +35,16 @@ def main():
     with open(DATA_DIR / "repo-numbers.json") as f:
         repo_numbers = json.load(f)
 
-    regexes = []
+    # fix up wrong replacements from previous migrations
+    regexes = [
+        r"regex:perf-frontend-issueshttps://github.com/mozilla-mobile/fenix/(pull|issues)/([0-9]*):==>https://github.com/mozilla-mobile/perf-frontend-issues/\2",
+        r"regex:mozilla-mobilehttps:==>https:",
+        r"regex:issuehttps:==>https:",
+        r"regex:mozilla/glean-dictionaryhttps://github.com/mozilla-mobile/fenix/pull/([0-9]*)==>https://github.com/mozilla/glean-dictionary/issues/\1",
+        r"regex:(closes|For)(https:)==>\1 \2",
+        r"regex:lifecyclehttps://github.com/mozilla-mobile/fenix/pull/2.2.0-rc02==>lifecycle#2.2.0-rc02",
+        r"regex:(Merge branch 'master' into .*)https://github.com/mozilla-mobile/[a-z-]*/(pull|issues)/(.*)==>\1#\3",
+    ]
 
     for repo_name in order_repo_names(repo_numbers.keys()):
         numbers = repo_numbers[repo_name]
