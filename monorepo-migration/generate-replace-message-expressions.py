@@ -38,28 +38,28 @@ def main():
     # fix up wrong replacements from previous migrations
     regexes = [
         # restore branch names
-        r"regex:(Merge .*branch '.*' into .*)https://github.com/mozilla-mobile/[a-z-]*/(pull|issues)/(.*)==>\1#\3\n",
+        r"regex:(Merge .*branch '.*' into .*)https://github.com/mozilla-mobile/[a-z-]*/(pull|issues)/(.*)==>\1#\3" "\n",
         # remove extra prefix
-        r"regex:mozilla-mobilehttps:==>https:\n",
+        r"regex:mozilla-mobilehttps:==>https:" "\n",
         # restore github references to other repos
-        r"regex:perf-frontend-issueshttps://github.com/mozilla-mobile/fenix/(pull|issues)/([0-9]*):==>https://github.com/mozilla-mobile/perf-frontend-issues/issues/\2\n",
-        r"regex:mozilla/glean-dictionaryhttps://github.com/mozilla-mobile/fenix/pull/([0-9]*)==>https://github.com/mozilla/glean-dictionary/issues/\1\n",
-        r"regex:mozilla/glean_parserhttps://github.com/mozilla-mobile/android-components/issues/([0-9]*)==>https://github.com/mozilla/glean_parser/issues/\1\n",
-        r"regex:mozilla/application-serviceshttps://github.com/mozilla-mobile/android-components/(issues|pull)/==>https://github.com/mozilla/application-services/issues/\n",
+        r"regex:perf-frontend-issueshttps://github.com/mozilla-mobile/fenix/(pull|issues)/([0-9]*):==>https://github.com/mozilla-mobile/perf-frontend-issues/issues/\2" "\n",
+        r"regex:mozilla/glean-dictionaryhttps://github.com/mozilla-mobile/fenix/pull/([0-9]*)==>https://github.com/mozilla/glean-dictionary/issues/\1" "\n",
+        r"regex:mozilla/glean_parserhttps://github.com/mozilla-mobile/android-components/issues/([0-9]*)==>https://github.com/mozilla/glean_parser/issues/\1" "\n",
+        r"regex:mozilla/application-serviceshttps://github.com/mozilla-mobile/android-components/(issues|pull)/==>https://github.com/mozilla/application-services/issues/" "\n",
         "literal:robolectric/robolectrichttps://github.com/mozilla-mobile/android-components/pull/5496==>https://github.com/robolectric/robolectric/issues/5496\n",
         "literal:AChttps://github.com/mozilla-mobile/fenix/issues/10231==>https://github.com/mozilla-mobile/android-components/issues/10231\n",
         "literal:AC#https://github.com/mozilla-mobile/fenix/pull/9024==>https://github.com/mozilla-mobile/android-components/pull/9024\n",
         "literal:AChttps://github.com/mozilla-mobile/fenix/issues/3695==>https://github.com/mozilla-mobile/android-components/issues/3695\n",
-        r"regex:(mozilla-l10n/focus-android-l10n)https://github.com/mozilla-mobile/focus-android/issues/==>https://github.com/\1/pull/\n",
+        r"regex:(mozilla-l10n/focus-android-l10n)https://github.com/mozilla-mobile/focus-android/issues/==>https://github.com/\1/pull/" "\n",
         # separate link from previous word
-        r"regex:(closes|For|Bug|issue|Issue)(https:)==>\1 \2\n",
+        r"regex:(closes|For|Bug|issue|Issue)(https:)==>\1 \2" "\n",
         "literal:Fixforhttps:==>Fix for https:\n",
         # non-github links with anchor/line number that got mistaken for an issue/PR
-        r"regex:lifecyclehttps://github.com/mozilla-mobile/fenix/pull/2.2.0-rc02==>lifecycle#2.2.0-rc02\n",
-        r"regex:(jsm|java)https://github.com/mozilla-mobile/android-components/(pull|issues)/==>\1#\n",
+        r"regex:lifecyclehttps://github.com/mozilla-mobile/fenix/pull/2.2.0-rc02==>lifecycle#2.2.0-rc02" "\n",
+        r"regex:(jsm|java)https://github.com/mozilla-mobile/android-components/(pull|issues)/==>\1#" "\n",
         # https://github.com/mozilla-mobile/android-components/commit/6dd40c4e0ac7e15c59b4bffbb0bb7a7eaa34071e got its links messed up, amongst others
-        r"regex:\[(@&)?https://github.com/mozilla-mobile/(android-components|fenix|focus-android)/(pull|issues)/([^]]*\]\(https://github)==>[\1#\4\n",
-        r"regex:(\[MRI\] .*\[)https://github.com/mozilla-mobile/android-components/issues/1953==>\1#\n",
+        r"regex:\[(@&)?https://github.com/mozilla-mobile/(android-components|fenix|focus-android)/(pull|issues)/([^]]*\]\(https://github)==>[\1#\4" "\n",
+        r"regex:(\[MRI\] .*\[)https://github.com/mozilla-mobile/android-components/issues/1953==>\1#" "\n",
         # code excerpt in a commit message got messed up
         'literal:("https://github.com/mozilla-mobile/android-components/issues/12345"))==>("mozilla-mobile/android-components#12345"))\n',
         'literal:(" https://github.com/mozilla-mobile/android-components/issues/12345 "))==>(" #12345 "))\n',
